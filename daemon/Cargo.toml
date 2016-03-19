@@ -1,0 +1,21 @@
+[package]
+name = "daemon"
+version = "0.1.0"
+authors = ["josh"]
+
+[dependencies]
+quickcheck = "*"
+serde = "*"
+serde_json = "*"
+serde_macros = "*"
+clippy = "*"
+libc = "0.2"
+uuid = "0.1"
+diesel = "0.5.0"
+diesel_codegen = { version = "0.5.0", default-features = false, features = ["nightly", "postgres"] }
+dotenv = "0.8.0"
+dotenv_macros = "0.8.0"
+log = "0.3"
+env_logger = "0.3"
+zmq = { git = "https://github.com/erickt/rust-zmq.git" }
+zmq-sys = { git = "https://github.com/erickt/rust-zmq.git", path = "zmq-sys" }

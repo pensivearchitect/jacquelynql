@@ -1,11 +1,11 @@
 #![feature(custom_derive, plugin, specialization)]
 #![plugin(clippy, dotenv_macros, serde_macros)]
 extern crate dotenv;
-#[macro_use]
-extern crate serde;
-extern crate serde_json;
 extern crate uuid;
 extern crate zmq;
+extern crate serde;
+extern crate serde_json;
+mod stats;
 
 use dotenv::dotenv;
 use std::thread;
@@ -28,8 +28,8 @@ fn events_remaining(socket: &zmq::Socket) -> i32 {
 
 fn get_message(socket: &mut zmq::Socket) -> String {
     let result = socket.recv_msg(0)
-                       .expect("could not receive message")
-                       .to_vec();
+        .expect("could not receive message")
+        .to_vec();
     String::from_utf8(result).unwrap()
 }
 

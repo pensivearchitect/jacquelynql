@@ -1,0 +1,71 @@
+{
+    "stats": {
+        "DATA" : {
+            "KILLER" : {
+                "AIRBORNE" : false,
+                "AMMO" : 15,
+                "ARMOR" : 27,
+                "BOT" : false,
+                "BOT_SKILL" : null,
+                "HEALTH" : 136,
+                "HOLDABLE" : null,
+                "NAME" : "RottenRandy",
+                "POSITION" : {
+                    "X" : 634.6002197265625,
+                    "Y" : 1301.248413085938,
+                    "Z" : 792.1285400390625
+                },
+                "POWERUPS" : null,
+                "SPEED" : 412.8892181532135,
+                "STEAM_ID" : "76561198155350335",
+                "SUBMERGED" : false,
+                "TEAM" : 2,
+                "VIEW" : {
+                    "X" : 7.547607421875,
+                    "Y" : -6.119384765625,
+                    "Z" : 0
+                },
+                "WEAPON" : "RAILGUN"
+            },
+            "MATCH_GUID" : "19405d4d-966d-4a17-a117-c5dacce9fedb",
+            "MOD" : "RAILGUN",
+            "OTHER_TEAM_ALIVE" : 1,
+            "OTHER_TEAM_DEAD" : 0,
+            "ROUND" : 0,
+            "SUICIDE" : false,
+            "TEAMKILL" : false,
+            "TEAM_ALIVE" : 0,
+            "TEAM_DEAD" : 1,
+            "TIME" : 204,
+            "VICTIM" : {
+                "AIRBORNE" : false,
+                "AMMO" : 79,
+                "ARMOR" : 0,
+                "BOT" : false,
+                "BOT_SKILL" : null,
+                "HEALTH" : 66,
+                "HOLDABLE" : null,
+                "NAME" : "^7(]^6[) bubblegum^7",
+                "POSITION" : {
+                    "X" : 903.6893310546875,
+                    "Y" : 1300.6728515625,
+                    "Z" : 792.2418212890625
+                },
+                "POWERUPS" : null,
+                "SPEED" : 470.1847459652006,
+                "STEAM_ID" : "76561198055779164",
+                "STREAK" : 0,
+                "SUBMERGED" : false,
+                "TEAM" : 1,
+                "VIEW" : {
+                    "X" : 8.7945556640625,
+                    "Y" : 164.1082763671875,
+                    "Z" : 0
+                },
+                "WEAPON" : "LIGHTNING"
+            },
+            "WARMUP" : true
+        },
+        "TYPE" : "PLAYER_KILL"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "stats": {
+        "DATA" : {
+            "MATCH_GUID" : "19405d4d-966d-4a17-a117-c5dacce9fedb",
+            "MEDAL" : "IMPRESSIVE",
+            "NAME" : "RottenRandy",
+            "STEAM_ID" : "76561198155350335",
+            "TIME" : 204,
+            "TOTAL" : 2,
+            "WARMUP" : true
+        },
+        "TYPE" : "PLAYER_MEDAL"
+    }
+}

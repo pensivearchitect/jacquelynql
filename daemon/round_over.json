@@ -1,0 +1,12 @@
+{
+    "stats": {
+        "DATA" : {
+            "MATCH_GUID" : "19405d4d-966d-4a17-a117-c5dacce9fedb",
+            "ROUND" : 1,
+            "TEAM_WON" : "RED",
+            "TIME" : 8,
+            "WARMUP" : false
+        },
+        "TYPE" : "ROUND_OVER"
+    }
+}

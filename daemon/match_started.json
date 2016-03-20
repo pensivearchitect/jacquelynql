@@ -1,0 +1,35 @@
+{
+    "stats": {
+        "DATA" : {
+            "CAPTURE_LIMIT" : 8,
+            "FACTORY" : "uft",
+            "FACTORY_TITLE" : "Ultra Freeze Tag",
+            "FRAG_LIMIT" : 50,
+            "GAME_TYPE" : "FT",
+            "INFECTED" : 0,
+            "INSTAGIB" : 0,
+            "MAP" : "theedge",
+            "MATCH_GUID" : "19405d4d-966d-4a17-a117-c5dacce9fedb",
+            "MERCY_LIMIT" : 0,
+            "PLAYERS" : [
+                {
+                    "NAME" : "^7(]^6[) bubblegum^7",
+                    "STEAM_ID" : "76561198055779164",
+                    "TEAM" : 1
+                },
+                {
+                    "NAME" : "RottenRandy",
+                    "STEAM_ID" : "76561198155350335",
+                    "TEAM" : 2
+                }
+            ],
+            "QUADHOG" : 0,
+            "ROUND_LIMIT" : 15,
+            "SCORE_LIMIT" : 150,
+            "SERVER_TITLE" : "[UFT] | DALLAS",
+            "TIME_LIMIT" : 15,
+            "TRAINING" : 0
+        },
+        "TYPE" : "MATCH_STARTED"
+    }
+}

@@ -4,6 +4,7 @@ extern crate redis;
 extern crate chrono;
 
 use serde_json::Value;
+use std::collections::BTreeMap;
 use chrono::*;
 use stats::models::*;
 use serde::de::Deserialize;
@@ -26,10 +27,19 @@ impl<T> Event for T
                                             .expect("could not obtain conn");
         let key = event_type;
         let _: () = conn.lpush(key, data).expect("could not push onto key");
+        // since we matched against the event_type and seperated the event type from the data
+        // we need to attach them to make discerning the type of event easier to
+        // grok in the last10events list
+        let mut coerce_to_value: Value = serde_json::from_str(&data).unwrap();
+        let mut data_btree = coerce_to_value.as_object_mut().unwrap();
+        let mut event_btree: BTreeMap<String, BTreeMap<String, Value>> = BTreeMap::new();
+        event_btree.insert(event_type.to_string(), data_btree.clone());
+        let event = serde_json::to_string(&event_btree).unwrap();
         // make inspecting the most recent values easier
         // it seems to be a safe assumption that we wont generate 10 events
         // in the time frame required to kick someone, will revisit if necessary
-        let _: () = conn.lpush("last10events", data).expect("could not push key onto last10events");
+        let _: () = conn.lpush("last10events", event)
+                        .expect("could not push key onto last10events");
         let _: () = conn.ltrim("last10events", 0, 9).expect("could not trim last10events");
     }
 }

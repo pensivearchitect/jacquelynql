@@ -3,7 +3,7 @@ extern crate redis;
 extern crate serde;
 extern crate serde_json;
 use stats::parser::Parser;
-use stats::models::*;
+use stats::models::MatchStarted;
 use redis::Commands;
 use std::env;
 use zmq_connection::*;
@@ -22,16 +22,15 @@ pub fn connection() {
     }
 }
 
-fn did_anyone_spectate() {
+pub fn did_anyone_spectate() {
     let client = redis::Client::open("redis://127.0.0.1/").expect("could not open conn");
     let conn: redis::Connection = client.get_connection()
                                         .expect("could not obtain conn");
     let last_ten_keys: Vec<String> = conn.lrange("last10events", 0, 9).unwrap();
-    let mut match_started: Vec<MatchStarted> = vec![];
     for value in &last_ten_keys {
-        let data: serde_json::Value = serde_json::from_str(&value.as_str()).unwrap();
+        println!("{}", value);
+        kick_player();
     }
-    println!("{:?}", last_ten_keys);
 }
 
 fn kick_player() {}

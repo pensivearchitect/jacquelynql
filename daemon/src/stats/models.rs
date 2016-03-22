@@ -1,6 +1,46 @@
 // encoding of all the server responses I've seen
-
 // repeat the fields for playerkill and death so that we can impl Event for each
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Killer {
+    name: Option<String>,
+    old_team: Option<String>,
+    steam_id: Option<String>,
+    team: Option<String>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct PlayerSwitchTeam {
+    killer: Option<Killer>,
+    match_guid: Option<String>,
+    time: Option<i64>,
+    warmup: Option<bool>,
+}
+#[derive(Debug, Deserialize, Serialize)]
+pub struct PlayerConnect {
+    #[serde(rename="MATCH_GUID")]
+    match_guid: Option<String>,
+    #[serde(rename="NAME")]
+    name: Option<String>,
+    #[serde(rename="STEAM_ID")]
+    steam_id: Option<String>,
+    #[serde(rename="TIME")]
+    time: Option<i64>,
+    #[serde(rename="WARMUP")]
+    warmup: Option<bool>,
+}
+#[derive(Debug, Deserialize, Serialize)]
+pub struct PlayerDisconnect {
+    #[serde(rename="MATCH_GUID")]
+    match_guid: Option<String>,
+    #[serde(rename="NAME")]
+    name: Option<String>,
+    #[serde(rename="STEAM_ID")]
+    steam_id: Option<String>,
+    #[serde(rename="TIME")]
+    time: Option<i64>,
+    #[serde(rename="WARMUP")]
+    warmup: Option<bool>,
+}
 #[derive(Debug, Deserialize, Serialize)]
 pub struct PlayerDeath {
     #[serde(rename="KILLER")]
@@ -10,21 +50,21 @@ pub struct PlayerDeath {
     #[serde(rename="WEAPON_MOD")]
     weapon_mod: Option<String>,
     #[serde(rename="OTHER_TEAM_ALIVE")]
-    other_team_alive: Option<i32>,
+    other_team_alive: Option<i64>,
     #[serde(rename="OTHER_TEAM_DEAD")]
-    other_team_dead: Option<i32>,
+    other_team_dead: Option<i64>,
     #[serde(rename="ROUND")]
-    round: Option<i32>,
+    round: Option<i64>,
     #[serde(rename="SUICIDE")]
     suicide: Option<bool>,
     #[serde(rename="TEAMKILL")]
     teamkill: Option<bool>,
     #[serde(rename="TEAM_ALIVE")]
-    team_alive: Option<i32>,
+    team_alive: Option<i64>,
     #[serde(rename="TEAM_DEAD")]
-    team_dead: Option<i32>,
+    team_dead: Option<i64>,
     #[serde(rename="TIME")]
-    time: Option<i32>,
+    time: Option<i64>,
     #[serde(rename="VICTIM")]
     victim: Option<Player>,
     #[serde(rename="WARMUP")]
@@ -40,21 +80,21 @@ pub struct PlayerKill {
     #[serde(rename="WEAPON_MOD")]
     weapon_mod: Option<String>,
     #[serde(rename="OTHER_TEAM_ALIVE")]
-    other_team_alive: Option<i32>,
+    other_team_alive: Option<i64>,
     #[serde(rename="OTHER_TEAM_DEAD")]
-    other_team_dead: Option<i32>,
+    other_team_dead: Option<i64>,
     #[serde(rename="ROUND")]
-    round: Option<i32>,
+    round: Option<i64>,
     #[serde(rename="SUICIDE")]
     suicide: Option<bool>,
     #[serde(rename="TEAMKILL")]
     teamkill: Option<bool>,
     #[serde(rename="TEAM_ALIVE")]
-    team_alive: Option<i32>,
+    team_alive: Option<i64>,
     #[serde(rename="TEAM_DEAD")]
-    team_dead: Option<i32>,
+    team_dead: Option<i64>,
     #[serde(rename="TIME")]
-    time: Option<i32>,
+    time: Option<i64>,
     #[serde(rename="VICTIM")]
     victim: Option<Player>,
     #[serde(rename="WARMUP")]
@@ -66,7 +106,7 @@ pub struct MatchReport {
     #[serde(rename="ABORTED")]
     aborted: Option<bool>,
     #[serde(rename="CAPTURE_LIMIT")]
-    capture_limit: Option<i32>,
+    capture_limit: Option<i64>,
     #[serde(rename="EXIT_MSG")]
     exit_msg: Option<String>,
     #[serde(rename="FACTORY")]
@@ -76,17 +116,17 @@ pub struct MatchReport {
     #[serde(rename="FIRST_SCORER")]
     first_scorer: Option<String>,
     #[serde(rename="FRAG_LIMIT")]
-    frag_limit: Option<i32>,
+    frag_limit: Option<i64>,
     #[serde(rename="GAME_LENGTH")]
-    game_length: Option<i32>,
+    game_length: Option<i64>,
     #[serde(rename="GAME_TYPE")]
     game_type: Option<String>,
     #[serde(rename="INFECTED")]
-    infected: Option<i32>,
+    infected: Option<i64>,
     #[serde(rename="INSTAGIB")]
     instagib: Option<u8>,
     #[serde(rename="LAST_LEAD_CHANGE_TIME")]
-    last_lead_change_time: Option<i32>,
+    last_lead_change_time: Option<i64>,
     #[serde(rename="LAST_SCORER")]
     last_scorer: Option<String>,
     #[serde(rename="LAST_TEAMSCORER")]
@@ -96,25 +136,25 @@ pub struct MatchReport {
     #[serde(rename="MATCH_GUID")]
     match_guid: Option<String>,
     #[serde(rename="MERCY_LIMIT")]
-    mercy_limit: Option<i32>,
+    mercy_limit: Option<i64>,
     #[serde(rename="QUAD_HOG")]
-    quad_hog: Option<i32>,
+    quad_hog: Option<i64>,
     #[serde(rename="RESTARTED")]
-    restarted: Option<i32>,
+    restarted: Option<i64>,
     #[serde(rename="ROUND_LIMIT")]
-    round_limit: Option<i32>,
+    round_limit: Option<i64>,
     #[serde(rename="SCORE_LIMIT")]
-    score_limit: Option<i32>,
+    score_limit: Option<i64>,
     #[serde(rename="SERVER_TITLE")]
     server_title: Option<String>,
     #[serde(rename="TIME_LIMIT")]
-    time_limit: Option<i32>,
+    time_limit: Option<i64>,
     #[serde(rename="training")]
-    training: Option<i32>,
+    training: Option<i64>,
     #[serde(rename="TSCORE0")]
-    tscore0: Option<i32>,
+    tscore0: Option<i64>,
     #[serde(rename="TSCORE1")]
-    tscore1: Option<i32>,
+    tscore1: Option<i64>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -128,9 +168,9 @@ pub struct PlayerMedal {
     #[serde(rename="STEAM_ID")]
     steam_id: Option<String>,
     #[serde(rename="TIME")]
-    time: Option<i32>,
+    time: Option<i64>,
     #[serde(rename="TOTAL")]
-    total: Option<i32>,
+    total: Option<i64>,
     #[serde(rename="WARMUP")]
     warmup: Option<bool>,
 }
@@ -140,138 +180,138 @@ pub struct PlayerStats {
     #[serde(rename="ABORTED")]
     aborted: Option<bool>,
     #[serde(rename="BLUE_FLAG_PICKUPS")]
-    blue_flag_pickups: Option<i32>,
+    blue_flag_pickups: Option<i64>,
     #[serde(rename="DAMAGE")]
     damage: Option<Damage>,
     #[serde(rename="DEATHS")]
-    deaths: Option<i32>,
+    deaths: Option<i64>,
     #[serde(rename="HOLY_SHITS")]
-    holy_shits: Option<i32>,
+    holy_shits: Option<i64>,
     #[serde(rename="ITEM_TIMING")]
     item_timing: Option<ItemTiming>,
     #[serde(rename="KILLS")]
-    kills: Option<i32>,
+    kills: Option<i64>,
     #[serde(rename="LOSE")]
-    lose: Option<i32>,
+    lose: Option<i64>,
     #[serde(rename="MATCH_GUID")]
     match_guid: Option<String>,
     #[serde(rename="MAX_STREAK")]
-    max_streak: Option<i32>,
+    max_streak: Option<i64>,
     #[serde(rename="MODEL")]
     model: Option<String>,
     #[serde(rename="NAME")]
     name: Option<String>,
     #[serde(rename="NEUTRAL_FLAG_PICKUPS")]
-    neutral_flag_pickups: Option<i32>,
+    neutral_flag_pickups: Option<i64>,
     #[serde(rename="PICKUPS")]
     pickups: Option<Pickups>,
     #[serde(rename="PLAY_TIME")]
-    play_time: Option<i32>,
+    play_time: Option<i64>,
     #[serde(rename="QUIT")]
-    quit: Option<i32>,
+    quit: Option<i64>,
     #[serde(rename="RANK")]
-    rank: Option<i32>,
+    rank: Option<i64>,
     #[serde(rename="RED_FLAG_PICKUPS")]
-    red_flag_pickups: Option<i32>,
+    red_flag_pickups: Option<i64>,
     #[serde(rename="SCORE")]
-    score: Option<i32>,
+    score: Option<i64>,
     #[serde(rename="STEAM_ID")]
     steam_id: Option<String>,
     #[serde(rename="TEAM")]
     team: Option<u8>,
     #[serde(rename="TEAM_JOIN_TIME")]
-    team_join_time: Option<i32>,
+    team_join_time: Option<i64>,
     #[serde(rename="TEAM_RANK")]
-    team_rank: Option<i32>,
+    team_rank: Option<i64>,
     #[serde(rename="TIED_RANK")]
-    tied_rank: Option<i32>,
+    tied_rank: Option<i64>,
     #[serde(rename="TIED_TEAM_RANK")]
-    tied_team_rank: Option<i32>,
+    tied_team_rank: Option<i64>,
     #[serde(rename="WARMUP")]
     warmup: Option<bool>,
     #[serde(rename="WIN")]
-    win: Option<i32>,
+    win: Option<i64>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-struct Pickups {
+pub struct Pickups {
     #[serde(rename="AMMO")]
-    ammo: Option<i32>,
+    ammo: Option<i64>,
     #[serde(rename="ARMOR")]
-    armor: Option<i32>,
+    armor: Option<i64>,
     #[serde(rename="ARMOR_REGEN")]
-    armor_regen: Option<i32>,
+    armor_regen: Option<i64>,
     #[serde(rename="BATTLESUIT")]
-    battlesuit: Option<i32>,
+    battlesuit: Option<i64>,
     #[serde(rename="DOUBLER")]
-    doubler: Option<i32>,
+    doubler: Option<i64>,
     #[serde(rename="FLIGHT")]
-    flight: Option<i32>,
+    flight: Option<i64>,
     #[serde(rename="GREEN_ARMOR")]
-    green_armor: Option<i32>,
+    green_armor: Option<i64>,
     #[serde(rename="GUARD")]
-    guard: Option<i32>,
+    guard: Option<i64>,
     #[serde(rename="HASTE")]
-    haste: Option<i32>,
+    haste: Option<i64>,
     #[serde(rename="HEALTH")]
-    health: Option<i32>,
+    health: Option<i64>,
     #[serde(rename="INVIS")]
-    invis: Option<i32>,
+    invis: Option<i64>,
     #[serde(rename="INVULNERABILITY")]
-    invulnerability: Option<i32>,
+    invulnerability: Option<i64>,
     #[serde(rename="KAMIKAZE")]
-    kamikaze: Option<i32>,
+    kamikaze: Option<i64>,
     #[serde(rename="MEDKIT")]
-    medkit: Option<i32>,
+    medkit: Option<i64>,
     #[serde(rename="MEGA_HEALTH")]
-    mega_health: Option<i32>,
+    mega_health: Option<i64>,
     #[serde(rename="OTHER_HOLDABLE")]
-    other_holdable: Option<i32>,
+    other_holdable: Option<i64>,
     #[serde(rename="PORTAL")]
-    portal: Option<i32>,
+    portal: Option<i64>,
     #[serde(rename="QUAD")]
-    quad: Option<i32>,
+    quad: Option<i64>,
     #[serde(rename="RED_ARMOR")]
-    red_armor: Option<i32>,
+    red_armor: Option<i64>,
     #[serde(rename="REGEN")]
-    regen: Option<i32>,
+    regen: Option<i64>,
     #[serde(rename="SCOUT")]
-    scout: Option<i32>,
+    scout: Option<i64>,
     #[serde(rename="TELEPORTER")]
-    teleporter: Option<i32>,
+    teleporter: Option<i64>,
     #[serde(rename="YELLOW_ARMOR")]
-    yellow_armor: Option<i32>,
+    yellow_armor: Option<i64>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-struct ItemTiming {
+pub struct ItemTiming {
     #[serde(rename="GREEN_ARMOR")]
-    green_armor: Option<i32>,
+    green_armor: Option<i64>,
     #[serde(rename="MEGA_HEALTH")]
-    mega_health: Option<i32>,
+    mega_health: Option<i64>,
     #[serde(rename="RED_ARMOR")]
-    red_armor: Option<i32>,
+    red_armor: Option<i64>,
     #[serde(rename="YELLOW_ARMOR")]
-    yellow_armor: Option<i32>,
+    yellow_armor: Option<i64>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-struct Damage {
+pub struct Damage {
     #[serde(rename="DEALT")]
-    dealt: Option<i32>,
+    dealt: Option<i64>,
     #[serde(rename="TAKEN")]
-    taken: Option<i32>,
+    taken: Option<i64>,
 }
 #[derive(Debug, Deserialize, Serialize)]
 pub struct RoundOver {
     #[serde(rename="MATCH_GUID")]
     match_guid: Option<String>,
     #[serde(rename="ROUND")]
-    round: Option<i32>,
+    round: Option<i64>,
     #[serde(rename="TEAM_WON")]
     team_won: String,
     #[serde(rename="TIME")]
-    time: Option<i32>,
+    time: Option<i64>,
     #[serde(rename="WARMUP")]
     warmup: Option<bool>,
 }
@@ -279,54 +319,55 @@ pub struct RoundOver {
 #[derive(Deserialize, Serialize, Debug)]
 pub struct MatchStarted {
     #[serde(rename="CAPTURE_LIMIT")]
-    capture_limit: i32,
+    capture_limit: i64,
     #[serde(rename="FACTORY")]
     factory: String,
     #[serde(rename="FACTORY_TITLE")]
     factory_title: String,
     #[serde(rename="FRAG_LIMIT")]
-    frag_limit: i32,
+    frag_limit: i64,
     #[serde(rename="GAME_TYPE")]
     game_type: String,
     #[serde(rename="INFECTED")]
-    infected: i32,
+    infected: i64,
     #[serde(rename="INSTAGIB")]
-    instagib: i32,
+    instagib: i64,
     #[serde(rename="MAP")]
     map: String,
     #[serde(rename="MATCH_GUID")]
     match_guid: String,
     #[serde(rename="MERCY_LIMIT")]
-    mercy_limit: i32,
+    mercy_limit: i64,
     #[serde(rename="PLAYERS")]
     players: Vec<Player>,
     #[serde(rename="QUAD_HOG")]
-    quad_hog: Option<i32>,
+    quad_hog: Option<i64>,
     #[serde(rename="ROUND_LIMIT")]
-    round_limit: i32,
+    round_limit: i64,
     #[serde(rename="SCORE_LIMIT")]
-    score_limit: i32,
+    score_limit: i64,
     #[serde(rename="SERVER_TITLE")]
     server_title: String,
     #[serde(rename="TIME_LIMIT")]
-    time_limit: i32,
+    time_limit: i64,
     #[serde(rename="TRAINING")]
-    training: i32,
+    training: i64,
 }
+
 #[derive(Debug, Deserialize, Serialize)]
-struct Player {
+pub struct Player {
     #[serde(rename="AIRBORNE")]
     airborne: Option<bool>,
     #[serde(rename="AMMO")]
-    ammo: Option<i32>,
+    ammo: Option<i64>,
     #[serde(rename="ARMOR")]
-    armor: Option<i32>,
+    armor: Option<i64>,
     #[serde(rename="BOT")]
     bot: Option<bool>,
     #[serde(rename="BOT_SKILL")]
-    bot_skill: Option<i32>,
+    bot_skill: Option<i64>,
     #[serde(rename="HEALTH")]
-    health: Option<i32>,
+    health: Option<i64>,
     #[serde(rename="HOLDABLE")]
     holdable: Option<String>,
     #[serde(rename="NAME")]
@@ -340,9 +381,9 @@ struct Player {
     #[serde(rename="STEAM_ID")]
     steam_id: Option<String>,
     #[serde(rename="STREAK")]
-    streak: Option<i32>,
-    #[serde(rename="ESUBMERGED")]
-    esubmerged: Option<bool>,
+    streak: Option<i64>,
+    #[serde(rename="SUBMERGED")]
+    submerged: Option<bool>,
     #[serde(rename="TEAM")]
     team: Option<u8>,
     #[serde(rename="VIEW")]
@@ -353,7 +394,7 @@ struct Player {
 
 // players position on the map
 #[derive(Debug, Deserialize, Serialize)]
-struct Position {
+pub struct Position {
     #[serde(rename="X")]
     x: Option<f32>,
     #[serde(rename="Y")]
@@ -364,7 +405,7 @@ struct Position {
 
 // where the player was facing when they died
 #[derive(Debug, Deserialize, Serialize)]
-struct View {
+pub struct View {
     #[serde(rename="X")]
     x: Option<f32>,
     #[serde(rename="Y")]

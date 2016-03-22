@@ -29,8 +29,8 @@ impl<T> Event for T
         // make inspecting the most recent values easier
         // it seems to be a safe assumption that we wont generate 10 events
         // in the time frame required to kick someone, will revisit if necessary
-        let _: () = conn.lpush("last10keys", data).expect("could not push key onto last10keys");
-        let _: () = conn.ltrim("last10keys", 0, 9).expect("could not trim last10keys");
+        let _: () = conn.lpush("last10events", data).expect("could not push key onto last10events");
+        let _: () = conn.ltrim("last10events", 0, 9).expect("could not trim last10events");
     }
 }
 

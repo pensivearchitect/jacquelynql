@@ -11,7 +11,6 @@ extern crate zmq;
 extern crate chrono;
 mod zmq_connection;
 mod stats;
-mod tests;
 mod rcon;
 
 use stats::parser::Parser;

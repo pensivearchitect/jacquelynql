@@ -28,6 +28,7 @@ fn did_anyone_spectate() {
     let conn: redis::Connection = client.get_connection()
                                         .expect("could not obtain conn");
     let last_ten_keys = conn.lrange("last10keys");
+    println!("{}", last_ten_keys);
 }
 
 fn kick_player() {

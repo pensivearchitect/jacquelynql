@@ -128,12 +128,4 @@ impl Parser {
             }
         }
     }
-    pub fn parse_file(f: String) {
-        let path = Path::new(&f);
-        let file_name = path.to_str().unwrap();
-        let mut file = File::open(&path).expect(format!("could not open {}", file_name).as_str());
-        let mut buffer = String::new();
-        file.read_to_string(&mut buffer).expect(format!("could not read {}", &file_name).as_str());
-        Parser::parse(buffer);
-    }
 }

@@ -12,7 +12,7 @@ Currently this only consists of the daemon, plans are to implement a web server 
 - [x] distinguish between zmq stats events
 - [ ] send rcon commands in response to zmq stats events
 - [ ] listen for chat events and send rcon commands in response (requires issuing a `"noop"` command through rcon then block until the msg is received unless a new event needs to be issued)
-- [ ] develop a player ranking system (cf [the hltv.org system](www.hltv.org/?pageid=242&eventid=0))
+- [ ] develop a player ranking system (cf [the hltv.org system](http://www.hltv.org/?pageid=242&eventid=0))
 - [ ] shuffle players at match start by rating
 
 ### Requirements

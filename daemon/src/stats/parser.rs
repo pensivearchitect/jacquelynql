@@ -36,7 +36,7 @@ pub fn grab_username() {
         rcon::spawn_command(&format!("say name: {}^7,  steam id: {}, server id: {}",
                                      captures.name("name").unwrap_or(""),
                                      captures.name("steam_id").unwrap_or(""),
-                                     captures.name("<player_id>").unwrap_or("")));
+                                     captures.name("player_id").unwrap_or("")));
     }
 }
 

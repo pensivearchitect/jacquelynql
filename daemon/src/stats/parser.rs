@@ -33,9 +33,8 @@ pub fn last_player_to_switch() -> String {
     let conn = establish_connection();
     let last_player_raw: Vec<String> = conn.lrange("player_switchteam", 0, 0)
                                            .unwrap_or(vec!["".to_string()]);
-    let last_player: PlayerSwitchTeam = serde_json::from_str(last_player_raw.first()
-                                                                            .unwrap()
-                                                                            .as_str())
+    let last_player: PlayerSwitchTeam = serde_json::from_str(&*last_player_raw.first()
+                                                                              .unwrap())
                                             .unwrap();
     last_player.killer.unwrap().steam_id.unwrap()
 }
@@ -47,11 +46,11 @@ pub fn find_last_event() {
     let events: Vec<String> = conn.lrange("last10events", 0, 9).unwrap();
     let mut time_of_last_teamchange: u32 = 16;
     for value in events.into_iter() {
-        let event: EventWithTimeStamp = serde_json::from_str(value.as_str()).unwrap();
+        let event: EventWithTimeStamp = serde_json::from_str(&*value).unwrap();
         println!("event type: {}", event.event);
         println!("last teamchange {}", time_of_last_teamchange);
         println!("current second mod 60: {}", Local::now().second());
-        match event.event.as_str() {
+        match &*event.event {
             "match_started" if (Local::now().second() % time_of_last_teamchange) <= 15 => {
                 time_of_last_teamchange = kick_player()
             }
@@ -70,7 +69,7 @@ pub fn grab_steam_id() -> Vec<(String, i32)> {
     println!("{:?}", response);
     let mut steam_ids: Vec<(String, i32)> = vec![];
     for player in response.into_iter() {
-        let captures = name_capture.captures(player.as_str()).unwrap();
+        let captures = name_capture.captures(&*player).unwrap();
         let player: (String, i32) = (captures.name("steam_id").unwrap_or("").to_owned(),
                                      captures.name("player_id")
                                              .unwrap_or("-1")
@@ -87,7 +86,7 @@ pub fn kick_player() -> u32 {
     let user_to_kick = users.first().unwrap();
     let steam_id_of_user = user_to_kick.1;
     let command: String = format!("say {} s", steam_id_of_user);
-    rcon::command(command.as_str());
+    rcon::command(&*command);
     16
 }
 
@@ -171,7 +170,7 @@ impl Parser {
             let _: () = conn.lpush("current_match", data)
                             .unwrap();
         }
-        let mut message_data: Value = serde_json::from_str(&string.as_str()).unwrap();
+        let mut message_data: Value = serde_json::from_str(&*string).unwrap();
         let object = message_data.as_object_mut().unwrap();
         let (data, event_type) = if object.contains_key("stats") {
             let stats = object.get("stats").unwrap().as_object().unwrap();

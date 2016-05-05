@@ -12,7 +12,7 @@ pub fn command(command: &str) {
     let mut socket = context.socket(zmq::DEALER).unwrap();
     let identity = Uuid::new_v4();
     socket.set_identity(&identity.to_simple_string().as_bytes()).unwrap();
-    assert!(socket.connect(addr.as_str()).is_ok());
+    assert!(socket.connect(&*addr).is_ok());
     let conn = establish_connection();
     socket.send(b"register\n", 0).unwrap();
     socket.send(command.as_bytes(), 0).unwrap();

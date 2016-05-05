@@ -6,7 +6,7 @@ extern crate regex;
 
 use serde_json::Value;
 use regex::Regex;
-use chrono::{Local, Timelike};
+use chrono::{UTC, Local, Timelike};
 use stats::models::*;
 use serde::de::Deserialize;
 use std::fmt::Debug;
@@ -123,8 +123,34 @@ impl Event for PlayerConnect {}
 impl Event for PlayerDisconnect {}
 impl Event for PlayerSwitchTeam {}
 
+impl MatchRecorder {
+    pub fn start() {
+        let client = redis::Client::open("redis://127.0.0.1/").expect("could not open conn");
+        let conn: redis::Connection = client.get_connection()
+                                            .expect("could not obtain conn");
+        let _: () = conn.set("ongoing_match", "1").expect("could not reset ongoing_match status");
+    }
+
+    pub fn end() {
+        let client = redis::Client::open("redis://127.0.0.1/").expect("could not open conn");
+        let conn: redis::Connection = client.get_connection()
+                                            .expect("could not obtain conn");
+        let _: () = conn.set("ongoing_match", "0").expect("could not reset ongoing_match status");
+        let _: () = conn.rename("current_match", UTC::now().timestamp().to_string().as_str())
+                        .expect("could not rename current_match to timestamped archive");
+    }
+}
+
 impl Parser {
     pub fn parse(string: String) {
+        let conn = establish_connection();
+        let ongoing: String = conn.get("ongoing_match")
+                                  .expect("could not retrieve ongoing_match status");
+        if ongoing == "1" {
+            let data = string.clone();
+            let _: () = conn.lpush("current_match", data)
+                            .unwrap();
+        }
         let mut message_data: Value = serde_json::from_str(&string.as_str()).unwrap();
         let object = message_data.as_object_mut().unwrap();
         let (data, event_type) = if object.contains_key("stats") {
@@ -140,10 +166,12 @@ impl Parser {
         };
         match event_type {
             "MATCH_STARTED" => {
+                MatchRecorder::start();
                 MatchStarted::new(&data, &event_type.to_lowercase());
             }
             "MATCH_REPORT" => {
                 MatchReport::new(&data, &event_type.to_lowercase());
+                MatchRecorder::end();
             }
             "PLAYER_KILL" => {
                 PlayerKill::new(&data, &event_type.to_lowercase());

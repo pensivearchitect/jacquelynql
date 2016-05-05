@@ -17,10 +17,13 @@ mod redis_connection;
 
 use std::thread;
 use dotenv::dotenv;
+use redis::Commands;
 
 fn main() {
     dotenv().ok();
     let mut children = vec![];
+    let conn = redis_connection::establish_connection();
+    let _: () = conn.set("ongoing_match", "0").expect("could not initialize ongoing_match");
     children.push(thread::spawn(move || {
         stats::zmq::connection();
     }));

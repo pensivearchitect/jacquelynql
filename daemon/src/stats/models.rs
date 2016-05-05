@@ -421,3 +421,5 @@ pub struct View {
     #[serde(rename="Z")]
     z: Option<f32>,
 }
+
+pub struct MatchRecorder {}

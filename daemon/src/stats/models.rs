@@ -2,18 +2,26 @@
 // repeat the fields for playerkill and death so that we can impl Event for each
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Killer {
-    name: Option<String>,
-    old_team: Option<String>,
-    steam_id: Option<String>,
-    team: Option<String>,
+    #[serde(rename="NAME")]
+    pub name: Option<String>,
+    #[serde(rename="OLD_TEAM")]
+    pub old_team: Option<String>,
+    #[serde(rename="STEAM_ID")]
+    pub steam_id: Option<String>,
+    #[serde(rename="TEAM")]
+    pub team: Option<String>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct PlayerSwitchTeam {
-    killer: Option<Killer>,
-    match_guid: Option<String>,
-    time: Option<i64>,
-    warmup: Option<bool>,
+    #[serde(rename="KILLER")]
+    pub killer: Option<Killer>,
+    #[serde(rename="MATCH_GUID")]
+    pub match_guid: Option<String>,
+    #[serde(rename="TIME")]
+    pub time: Option<i64>,
+    #[serde(rename="WARMUP")]
+    pub warmup: Option<bool>,
 }
 #[derive(Debug, Deserialize, Serialize)]
 pub struct PlayerConnect {

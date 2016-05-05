@@ -6,7 +6,7 @@ use redis::Commands;
 use redis_connection::establish_connection;
 
 #[allow(dead_code)]
-pub fn spawn_command(command: &str) {
+pub fn command(command: &str) {
     let addr = env::var("RCON_SOCKET").unwrap();
     let mut context = zmq::Context::new();
     let mut socket = context.socket(zmq::DEALER).unwrap();
@@ -17,12 +17,13 @@ pub fn spawn_command(command: &str) {
     socket.send(b"register\n", 0).unwrap();
     socket.send(command.as_bytes(), 0).unwrap();
     // read the message acknowledging that the command was received
-    let _: () = conn.lpush("last_ten_rcon_messages", get_message(&mut socket)).unwrap();
+    // but dont store it
+    get_message(&mut socket);
     // then read the output that the command produced
     loop {
-        let _: () = conn.lpush("last_ten_rcon_messages", get_message(&mut socket)).unwrap();
         if events_remaining(&socket) <= 0 {
             break;
         }
+        let _: () = conn.lpush("last_ten_rcon_messages", get_message(&mut socket)).unwrap();
     }
 }

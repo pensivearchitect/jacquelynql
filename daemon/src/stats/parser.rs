@@ -25,19 +25,16 @@ trait Event {
     fn new(&str, &str) -> ();
 }
 
-pub fn grab_username() {
+
+pub fn last_player_to_switch() -> String {
     let conn = establish_connection();
-    rcon::spawn_command("players");
-    // format: server_player_id steam_id (admin status or blank) ql_formatted_steam_name
-    let name_capture = Regex::new(r"\Aprint.* (?P<player_id>\d) (?P<steam_id>\d+?) (?P<admin_status>\w*?) (?P<name>.*)\^7").unwrap();
-    let response: Vec<String> = conn.lrange("last_ten_rcon_messages", 0, 0).unwrap();
-    for player in response.into_iter() {
-        let captures = name_capture.captures(player.as_str()).unwrap();
-        rcon::spawn_command(&format!("say name: {}^7,  steam id: {}, server id: {}",
-                                     captures.name("name").unwrap_or(""),
-                                     captures.name("steam_id").unwrap_or(""),
-                                     captures.name("player_id").unwrap_or("")));
-    }
+    let last_player_raw: Vec<String> = conn.lrange("player_switchteam", 0, 0)
+                                           .unwrap_or(vec!["".to_string()]);
+    let last_player: PlayerSwitchTeam = serde_json::from_str(last_player_raw.first()
+                                                                            .unwrap()
+                                                                            .as_str())
+                                            .unwrap();
+    last_player.killer.unwrap().steam_id.unwrap()
 }
 
 pub fn find_last_event() {
@@ -48,8 +45,11 @@ pub fn find_last_event() {
     let mut time_of_last_teamchange: u32 = 16;
     for value in events.into_iter() {
         let event: EventWithTimeStamp = serde_json::from_str(value.as_str()).unwrap();
+        println!("event type: {}", event.event);
+        println!("last teamchange {}", time_of_last_teamchange);
+        println!("current second mod 60: {}", Local::now().second());
         match event.event.as_str() {
-            "match_started" if (Local::now().second() - time_of_last_teamchange) <= 15 => {
+            "match_started" if (Local::now().second() % time_of_last_teamchange) <= 15 => {
                 time_of_last_teamchange = kick_player()
             }
             "player_switchteam" => time_of_last_teamchange = event.time,
@@ -58,8 +58,33 @@ pub fn find_last_event() {
     }
 }
 
-fn kick_player() -> u32 {
-    rcon::spawn_command("say player kick condition reached");
+pub fn grab_steam_id() -> Vec<(String, i32)> {
+    let conn = establish_connection();
+    rcon::command("players");
+    // format: server_player_id steam_id (admin status or blank) ql_formatted_steam_name
+    let name_capture = Regex::new(r"\Aprint.* (?P<player_id>\d) (?P<steam_id>\d+?) (?P<admin_status>\w*?) (?P<name>.*)\^7").unwrap();
+    let response: Vec<String> = conn.lrange("last_ten_rcon_messages", 0, 0).unwrap();
+    println!("{:?}", response);
+    let mut steam_ids: Vec<(String, i32)> = vec![];
+    for player in response.into_iter() {
+        let captures = name_capture.captures(player.as_str()).unwrap();
+        let player: (String, i32) = (captures.name("steam_id").unwrap_or("").to_owned(),
+                                     captures.name("player_id")
+                                             .unwrap_or("-1")
+                                             .parse::<i32>()
+                                             .unwrap_or(-1));
+        steam_ids.push(player);
+    }
+    println!("{:?}", steam_ids);
+    steam_ids
+}
+
+pub fn kick_player() -> u32 {
+    let users = grab_steam_id();
+    let user_to_kick = users.first().unwrap();
+    let steam_id_of_user = user_to_kick.1;
+    let command: String = format!("say {} s", steam_id_of_user);
+    rcon::command(command.as_str());
     16
 }
 
@@ -78,7 +103,7 @@ impl<T> Event for T
         // it seems to be a safe assumption that we wont generate 10 events
         // in the time frame required to kick someone, will revisit if necessary
         let event = EventWithTimeStamp {
-            time: Local::now().nanosecond(),
+            time: Local::now().second(),
             event: event_type.to_string(),
         };
         let _: () = conn.lpush("last10events", serde_json::to_string(&event).unwrap())

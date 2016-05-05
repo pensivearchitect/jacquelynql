@@ -1,5 +1,5 @@
-#![feature(custom_derive, plugin, specialization, question_mark)]
-#![plugin(dotenv_macros, serde_macros, stainless)]
+#![feature(custom_derive, plugin, specialization, question_mark, type_macros)]
+#![plugin(dotenv_macros, serde_macros)]
 extern crate dotenv;
 extern crate uuid;
 extern crate serde;
@@ -22,8 +22,7 @@ fn main() {
     dotenv().ok();
     let mut children = vec![];
     children.push(thread::spawn(move || {
-        // stats::zmq::connection();
-        stats::parser::grab_username();
+        stats::zmq::connection();
     }));
     for child in children {
         let _ = child.join();

@@ -5,7 +5,6 @@ authors = ["josh@joshuabell.io"]
 
 [dependencies]
 quickcheck = "*"
-stainless = "*"
 serde = "*"
 serde_json = "*"
 serde_macros = "*"

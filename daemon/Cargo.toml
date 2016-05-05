@@ -16,4 +16,5 @@ dotenv_macros = "0.8.0"
 bincode = "*"
 chrono = "*"
 regex = "0.1"
+hyper = "*"
 zmq = { git = "https://github.com/erickt/rust-zmq.git" }

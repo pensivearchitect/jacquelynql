@@ -4,6 +4,8 @@ extern crate redis;
 extern crate chrono;
 extern crate regex;
 
+// bit of a mess, will break everything out into modules once this workse
+// aka this is here to stay forever
 use serde_json::Value;
 use regex::Regex;
 use chrono::{UTC, Local, Timelike};
@@ -12,6 +14,7 @@ use serde::de::Deserialize;
 use std::fmt::Debug;
 use redis::{Commands, PipelineCommands};
 use redis_connection::establish_connection;
+use hyper::Client;
 use rcon;
 pub struct Parser;
 
@@ -132,11 +135,28 @@ impl MatchRecorder {
     }
 
     pub fn end() {
+        // reset match recording status
         let client = redis::Client::open("redis://127.0.0.1/").expect("could not open conn");
         let conn: redis::Connection = client.get_connection()
                                             .expect("could not obtain conn");
         let _: () = conn.set("ongoing_match", "0").expect("could not reset ongoing_match status");
-        let _: () = conn.rename("current_match", UTC::now().timestamp().to_string().as_str())
+        // phone home
+        let client = Client::new();
+        let match_data_vec: Vec<String> = conn.lrange("current_match", 0, -1)
+                                              .unwrap_or(vec!["".to_string()]);
+        // push_str returns () so we make this mut for readability reasons
+        let mut match_data: String = String::from("{ \"match_data\": [");
+        match_data.push_str(&*match_data_vec.join(", "));
+        match_data.push_str("] }");
+        match client.post("http://127.0.0.1:3000/matches")
+                    .body(&match_data)
+                    .send() {
+            Ok(response) => (),
+            Err(err) => println!("{}", err),
+        }
+        // archive match
+        // TODO: delete archived matches after x number of games
+        let _: () = conn.rename("current_match", &*UTC::now().timestamp().to_string())
                         .expect("could not rename current_match to timestamped archive");
     }
 }

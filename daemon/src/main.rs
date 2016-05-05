@@ -10,6 +10,7 @@ extern crate bincode;
 extern crate zmq;
 extern crate chrono;
 extern crate regex;
+extern crate hyper;
 mod zmq_connection;
 mod stats;
 mod rcon;

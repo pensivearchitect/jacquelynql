@@ -1,0 +1,216 @@
+{
+   "DATA" : {
+      "ABORTED" : false,
+      "DAMAGE" : {
+         "DEALT" : 2246,
+         "TAKEN" : 3094
+      },
+      "DEATHS" : 13,
+      "ITEM_TIMING" : {
+         "GREEN_ARMOR" : 16142,
+         "RED_ARMOR" : 1575,
+         "YELLOW_ARMOR" : 13415
+      },
+      "KILLS" : 0,
+      "LOSE" : 1,
+      "MATCH_GUID" : "c85e6403-686d-4ae2-b269-544222fe8d5c",
+      "MAX_STREAK" : 0,
+      "MEDALS" : {
+         "ACCURACY" : 0,
+         "ASSISTS" : 0,
+         "CAPTURES" : 0,
+         "COMBOKILL" : 0,
+         "DEFENDS" : 0,
+         "EXCELLENT" : 0,
+         "FIRSTFRAG" : 0,
+         "HEADSHOT" : 0,
+         "HUMILIATION" : 0,
+         "IMPRESSIVE" : 0,
+         "MIDAIR" : 0,
+         "PERFECT" : 0,
+         "PERFORATED" : 0,
+         "QUADGOD" : 0,
+         "RAMPAGE" : 0,
+         "REVENGE" : 0
+      },
+      "MODEL" : "ranger",
+      "NAME" : "guac",
+      "PICKUPS" : {
+         "AMMO" : 13,
+         "ARMOR" : 67,
+         "ARMOR_REGEN" : 0,
+         "BATTLESUIT" : 0,
+         "DOUBLER" : 0,
+         "FLIGHT" : 0,
+         "GREEN_ARMOR" : 16,
+         "GUARD" : 0,
+         "HASTE" : 0,
+         "HEALTH" : 28,
+         "INVIS" : 0,
+         "INVULNERABILITY" : 0,
+         "KAMIKAZE" : 0,
+         "MEDKIT" : 0,
+         "MEGA_HEALTH" : 0,
+         "OTHER_HOLDABLE" : 0,
+         "OTHER_POWERUP" : 0,
+         "PORTAL" : 0,
+         "QUAD" : 0,
+         "RED_ARMOR" : 2,
+         "REGEN" : 0,
+         "SCOUT" : 0,
+         "TELEPORTER" : 0,
+         "YELLOW_ARMOR" : 11
+      },
+      "PLAY_TIME" : 599,
+      "QUIT" : 0,
+      "RANK" : 2,
+      "SCORE" : 0,
+      "STEAM_ID" : "76561198055779164",
+      "TIED_RANK" : 0,
+      "WARMUP" : false,
+      "WEAPONS" : {
+         "BFG" : {
+            "D" : 0,
+            "DG" : 0,
+            "DR" : 0,
+            "H" : 0,
+            "K" : 0,
+            "P" : 0,
+            "S" : 0,
+            "T" : 0
+         },
+         "CHAINGUN" : {
+            "D" : 0,
+            "DG" : 0,
+            "DR" : 0,
+            "H" : 0,
+            "K" : 0,
+            "P" : 0,
+            "S" : 0,
+            "T" : 0
+         },
+         "GAUNTLET" : {
+            "D" : 0,
+            "DG" : 0,
+            "DR" : 0,
+            "H" : 0,
+            "K" : 0,
+            "P" : 0,
+            "S" : 0,
+            "T" : 0
+         },
+         "GRENADE" : {
+            "D" : 0,
+            "DG" : 0,
+            "DR" : 0,
+            "H" : 0,
+            "K" : 0,
+            "P" : 0,
+            "S" : 0,
+            "T" : 0
+         },
+         "HMG" : {
+            "D" : 0,
+            "DG" : 0,
+            "DR" : 0,
+            "H" : 0,
+            "K" : 0,
+            "P" : 0,
+            "S" : 0,
+            "T" : 0
+         },
+         "LIGHTNING" : {
+            "D" : 2,
+            "DG" : 312,
+            "DR" : 704,
+            "H" : 52,
+            "K" : 0,
+            "P" : 8,
+            "S" : 181,
+            "T" : 16
+         },
+         "MACHINEGUN" : {
+            "D" : 0,
+            "DG" : 10,
+            "DR" : 0,
+            "H" : 2,
+            "K" : 0,
+            "P" : 0,
+            "S" : 9,
+            "T" : 161
+         },
+         "NAILGUN" : {
+            "D" : 0,
+            "DG" : 0,
+            "DR" : 0,
+            "H" : 0,
+            "K" : 0,
+            "P" : 0,
+            "S" : 0,
+            "T" : 0
+         },
+         "OTHER_WEAPON" : {
+            "D" : 0,
+            "DG" : 0,
+            "DR" : 0,
+            "H" : 0,
+            "K" : 0,
+            "P" : 0,
+            "S" : 0,
+            "T" : 0
+         },
+         "PLASMA" : {
+            "D" : 0,
+            "DG" : 0,
+            "DR" : 0,
+            "H" : 0,
+            "K" : 0,
+            "P" : 9,
+            "S" : 0,
+            "T" : 3
+         },
+         "PROXMINE" : {
+            "D" : 0,
+            "DG" : 0,
+            "DR" : 0,
+            "H" : 0,
+            "K" : 0,
+            "P" : 0,
+            "S" : 0,
+            "T" : 0
+         },
+         "RAILGUN" : {
+            "D" : 5,
+            "DG" : 240,
+            "DR" : 784,
+            "H" : 3,
+            "K" : 0,
+            "P" : 6,
+            "S" : 14,
+            "T" : 46
+         },
+         "ROCKET" : {
+            "D" : 3,
+            "DG" : 1524,
+            "DR" : 1261,
+            "H" : 32,
+            "K" : 0,
+            "P" : 20,
+            "S" : 77,
+            "T" : 402
+         },
+         "SHOTGUN" : {
+            "D" : 3,
+            "DG" : 160,
+            "DR" : 275,
+            "H" : 32,
+            "K" : 0,
+            "P" : 7,
+            "S" : 120,
+            "T" : 21
+         }
+      },
+      "WIN" : 0
+   },
+   "TYPE" : "PLAYER_STATS"
+}

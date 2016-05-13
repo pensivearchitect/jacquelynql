@@ -1,0 +1,69 @@
+{
+   "DATA" : {
+      "KILLER" : {
+         "AIRBORNE" : true,
+         "AMMO" : 22,
+         "ARMOR" : 96,
+         "BOT" : false,
+         "BOT_SKILL" : null,
+         "HEALTH" : 99,
+         "HOLDABLE" : null,
+         "NAME" : "^7thunde^4R^7",
+         "POSITION" : {
+            "X" : 1190.688720703125,
+            "Y" : -900.96044921875,
+            "Z" : -61.60556030273438
+         },
+         "POWERUPS" : null,
+         "SPEED" : 292.2326239739269,
+         "STEAM_ID" : "76561197984745496",
+         "SUBMERGED" : false,
+         "TEAM" : 0,
+         "VIEW" : {
+            "X" : 11.656494140625,
+            "Y" : 89.879150390625,
+            "Z" : 0
+         },
+         "WEAPON" : "SHOTGUN"
+      },
+      "MATCH_GUID" : "c85e6403-686d-4ae2-b269-544222fe8d5c",
+      "MOD" : "SHOTGUN",
+      "OTHER_TEAM_ALIVE" : null,
+      "OTHER_TEAM_DEAD" : null,
+      "ROUND" : null,
+      "SUICIDE" : false,
+      "TEAMKILL" : false,
+      "TEAM_ALIVE" : null,
+      "TEAM_DEAD" : null,
+      "TIME" : 582,
+      "VICTIM" : {
+         "AIRBORNE" : false,
+         "AMMO" : 5,
+         "ARMOR" : 0,
+         "BOT" : false,
+         "BOT_SKILL" : null,
+         "HEALTH" : 4,
+         "HOLDABLE" : null,
+         "NAME" : "guac",
+         "POSITION" : {
+            "X" : 1171.64599609375,
+            "Y" : -627.474853515625,
+            "Z" : -103.8736038208008
+         },
+         "POWERUPS" : null,
+         "SPEED" : 210.8450626156909,
+         "STEAM_ID" : "76561198055779164",
+         "STREAK" : 0,
+         "SUBMERGED" : false,
+         "TEAM" : 0,
+         "VIEW" : {
+            "X" : 9.8382568359375,
+            "Y" : -94.4110107421875,
+            "Z" : 0
+         },
+         "WEAPON" : "ROCKET"
+      },
+      "WARMUP" : false
+   },
+   "TYPE" : "PLAYER_KILL"
+}

@@ -1,0 +1,17 @@
+frontend/bower_components/
+frontend/node_modules/
+frontend/tmp/
+!.keep
+*.DS_Store
+*.swo
+*.swp
+/.bundle
+/.env.local
+/coverage/*
+/db/*.sqlite3
+/log/*
+/public/system
+/public/assets
+/tags
+/tmp/*
+/app/assets/javascripts/bundle.js

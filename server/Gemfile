@@ -8,7 +8,6 @@ gem "flutie"
 gem "high_voltage"
 gem "jquery-rails"
 gem "neat", "~> 1.7.0"
-gem "newrelic_rpm", ">= 3.9.8"
 gem "normalize-rails", "~> 3.0.0"
 gem "pg"
 gem "puma"
@@ -21,7 +20,9 @@ gem "title"
 gem "uglifier"
 gem "sidekiq"
 gem "ember-cli-rails"
-gem "active_model_serializers"
+gem "active_model_serializers", "~> 0.10.rc5"
+gem "lograge"
+gem "logstash-event"
 
 group :development do
   gem "quiet_assets"
@@ -39,7 +40,7 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "pry-byebug"
   gem "pry-rails"
-  gem "rspec-rails"
+  gem "rspec-rails", "~> 3.5.0.beta3"
 end
 
 group :development, :staging do

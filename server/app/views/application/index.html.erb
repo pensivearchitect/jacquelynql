@@ -1,2 +1,6 @@
-<div id="app"></div>
-<%= javascript_include_tag "bundle" %>
+<%= render_ember_app :frontend do |head| %>
+  <% head.append do %>
+    <%= stylesheet_link_tag "application" %>
+    <%= csrf_meta_tags %>
+  <% end %>
+<% end %>

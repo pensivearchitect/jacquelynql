@@ -1,0 +1,13 @@
+{{outlet}}
+<p>Recent Matches</p>
+<ul>
+{{#each model as |match|}}
+<li>Server: {{match.serverName}}</li>
+<li>Game Type: {{match.gameType}}</li>
+<p>Players:</p>
+{{#each match.players as |player|}}
+<li>player.name</li>
+{{/each}}
+{{/each}}
+</ul>
+
